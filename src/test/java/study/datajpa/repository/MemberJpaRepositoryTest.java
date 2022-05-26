@@ -58,4 +58,15 @@ class MemberJpaRepositoryTest {
 
     }
 
+    @Test
+    void TestNameQuery(){
+        Member member1 = new Member("member1");
+        Member member2 = new Member("member2");
+        memberJpaRepository.save(member1);
+        memberJpaRepository.save(member2);
+
+        List<Member> findMembers = memberJpaRepository.findByUsername("member1");
+        assertEquals(findMembers.get(0),member1);
+    }
+
 }

@@ -12,6 +12,7 @@ import study.datajpa.domain.Member;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static org.assertj.core.api.Assertions.*;
 
 @SpringBootTest
 @Transactional
@@ -69,4 +70,46 @@ class MemberJpaRepositoryTest {
         assertEquals(findMembers.get(0),member1);
     }
 
+    @Test
+    void TestPaging(){
+        memberJpaRepository.save(new Member("member1",10));
+        memberJpaRepository.save(new Member("member2",10));
+        memberJpaRepository.save(new Member("member3",10));
+        memberJpaRepository.save(new Member("member4",10));
+        memberJpaRepository.save(new Member("member5",10));
+        memberJpaRepository.save(new Member("member6",10));
+        memberJpaRepository.save(new Member("member7",10));
+        memberJpaRepository.save(new Member("member8",10));
+        memberJpaRepository.save(new Member("member9",10));
+        memberJpaRepository.save(new Member("member10",10));
+
+        int age = 10;
+        int offset = 0;
+        int limit = 3;
+
+        List<Member> memberList = memberJpaRepository.findByPage(age, offset, limit);
+        long totalCount = memberJpaRepository.totalCount(age);
+
+        assertThat(memberList.size()).isEqualTo(3);
+        assertThat(totalCount).isEqualTo(10);
+    }
+
+
+    @Test
+    void bulkUpdateTest(){
+        memberJpaRepository.save(new Member("member1",10));
+        memberJpaRepository.save(new Member("member2",11));
+        memberJpaRepository.save(new Member("member3",12));
+        memberJpaRepository.save(new Member("member4",13));
+        memberJpaRepository.save(new Member("member5",14));
+        memberJpaRepository.save(new Member("member6",15));
+        memberJpaRepository.save(new Member("member7",16));
+        memberJpaRepository.save(new Member("member8",23));
+        memberJpaRepository.save(new Member("member9",21));
+        memberJpaRepository.save(new Member("member10",20));
+
+        int resultCount = memberJpaRepository.bulkAgePlus(20);
+
+        assertThat(resultCount).isEqualTo(3);
+    }
 }

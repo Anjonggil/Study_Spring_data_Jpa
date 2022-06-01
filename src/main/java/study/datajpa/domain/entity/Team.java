@@ -1,4 +1,4 @@
-package study.datajpa.domain;
+package study.datajpa.domain.entity;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -10,7 +10,7 @@ import java.util.List;
 @Entity
 @Getter
 @Setter
-public class Team {
+public class Team extends BaseEntity{
     @Id @GeneratedValue
     @Column(name = "team_id")
     private Long id;

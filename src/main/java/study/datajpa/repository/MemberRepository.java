@@ -5,17 +5,16 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Slice;
 import org.springframework.data.jpa.repository.*;
 import org.springframework.data.repository.query.Param;
-import study.datajpa.domain.Member;
-import study.datajpa.domain.MemberDto;
+import study.datajpa.domain.entity.Member;
+import study.datajpa.domain.dto.MemberDto;
 
-import javax.persistence.Column;
 import javax.persistence.LockModeType;
 import javax.persistence.QueryHint;
 import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
 
-public interface MemberRepository extends JpaRepository<Member,Long> {
+public interface MemberRepository extends JpaRepository<Member,Long>,MemberRepositoryCustom {
     List<Member> findByUsernameAndAgeGreaterThan(String username,int age);
 
     @Query(name = "Member.findByUsername")
@@ -27,7 +26,7 @@ public interface MemberRepository extends JpaRepository<Member,Long> {
     @Query(value = "select m.username from Member m")
     List<String> findUsernameList();
 
-    @Query(value = "select new study.datajpa.domain.MemberDto(m.id, m.username, t.name) from Member m join m.team t")
+    @Query(value = "select new study.datajpa.domain.dto.MemberDto(m.id, m.username, t.name) from Member m join m.team t")
     List<MemberDto> findMemberDto();
 
     @Query("select m from Member m where m.username in :names")

@@ -1,8 +1,7 @@
 package study.datajpa.repository;
 
 import org.springframework.stereotype.Repository;
-import study.datajpa.domain.Member;
-import study.datajpa.domain.Team;
+import study.datajpa.domain.entity.Team;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;

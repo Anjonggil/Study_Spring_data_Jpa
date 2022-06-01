@@ -1,4 +1,4 @@
-package study.datajpa.domain;
+package study.datajpa.domain.dto;
 
 import lombok.Data;
 

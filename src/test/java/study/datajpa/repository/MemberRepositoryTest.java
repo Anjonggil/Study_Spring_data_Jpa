@@ -9,9 +9,9 @@ import org.springframework.data.domain.Slice;
 import org.springframework.data.domain.Sort;
 import org.springframework.test.annotation.Rollback;
 import org.springframework.transaction.annotation.Transactional;
-import study.datajpa.domain.Member;
-import study.datajpa.domain.MemberDto;
-import study.datajpa.domain.Team;
+import study.datajpa.domain.entity.Member;
+import study.datajpa.domain.dto.MemberDto;
+import study.datajpa.domain.entity.Team;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -293,5 +293,10 @@ class MemberRepositoryTest {
         em.clear();
 
         List<Member> findMemberList = memberRepository.findLockByUsername(member1.getUsername());
+    }
+
+    @Test
+    void callTest(){
+        List<Member> result = memberRepository.findMemberCustom();
     }
 }
